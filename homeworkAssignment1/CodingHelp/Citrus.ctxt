@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=freshness\ taste\ sourness
+comment0.target=Citrus(int,\ int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Citrus\n
+numComments=1
