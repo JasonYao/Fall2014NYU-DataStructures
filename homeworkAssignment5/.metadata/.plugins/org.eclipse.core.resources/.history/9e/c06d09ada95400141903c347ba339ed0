@@ -1,0 +1,5 @@
+package codingHelp;
+
+public interface GenericList<T> {
+
+}

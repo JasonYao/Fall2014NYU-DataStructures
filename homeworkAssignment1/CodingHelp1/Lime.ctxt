@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=freshness\ taste\ sourness\ limeness
+comment0.target=Lime(int,\ int,\ int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Lime\n
+numComments=1

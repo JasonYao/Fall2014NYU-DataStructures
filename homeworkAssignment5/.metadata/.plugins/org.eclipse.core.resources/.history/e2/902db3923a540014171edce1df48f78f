@@ -1,0 +1,22 @@
+/**
+ * 
+ */
+package codingHelp;
+
+/**
+ * @author Jason
+ *
+ */
+public class Homework4Assignment {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		char test = '%';
+		System.out.println(test);
+	}
+
+}
