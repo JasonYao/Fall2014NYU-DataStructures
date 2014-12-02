@@ -1,0 +1,63 @@
+/**
+ * 
+ */
+
+/**
+ * This class provides representation of an AVL self-balancing binary search tree.
+ * @author Jason Yao
+ * @author Joanna Klukowska
+ * NOTE: The following code was taken from the Lecture 6 notes on BST trees, and adapted for the
+ * purposes of this assignment.
+ */
+public class AVLTree <T extends Comparable<T>>
+{
+	// Root of the tree
+	private AVLNode<T> root;
+	// Current number of nodes in the tree
+	private int numOfElements;
+	// Queue used for implementation of some of the methods below
+	private Queue<T> queue;
+
+	/**
+	 * Instantiates an empty tree
+	 */
+	public AVLTree ()
+	{this.root = null;
+	numOfElements = 0;}
+
+	/**
+	 * Add the given data item to the tree. If item is null, the tree does not change.
+	 * @param item the new element to be added to the tree
+	 */
+	public void insert(T data)
+	{
+		if (data == null)
+			return;
+		if (root == null)
+			// create a new node and make it the root the tree 
+			root = new AVLNode<T>(item); 
+		else {
+			// Locate the parent node for the new node
+			BSTNode<T> parent = null;
+			BSTNode<T> current = root;
+			// go down one of the branches of the tree until the
+			// proper place for the new node is found
+			while (current != null) {
+				if (item.compareTo(current.getData()) < 0) {
+					parent = current;
+					current = current.getLeft();
+				} else {
+					parent = current;
+					current = current.getRight();
+				}
+			}
+			// Create the new node and attach it to the parent node
+			if (item.compareTo(parent.getData()) < 0)
+				parent.setLeft(new BSTNode<T>(item));
+			else
+				parent.setRight(new BSTNode<T>(item));
+		}
+		numOfElements++;
+
+	}
+} // End of the AVLTree class

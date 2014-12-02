@@ -1,0 +1,9 @@
+
+public class InvalidCommandLineArgumentException extends Exception
+{
+	public InvalidCommandLineArgumentException ()
+	{super();}
+	
+	public InvalidCommandLineArgumentException (String s)
+	{super(s);}
+}

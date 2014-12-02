@@ -1,0 +1,40 @@
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * 
+ */
+
+/**
+ * @author Jason
+ *
+ */
+public class CollectionOfLetters
+{
+	// Global Attributes
+	private List<String> confirmedWords = new ArrayList<String>();
+	private List<String> permutations = new ArrayList<String>();
+	
+	public CollectionOfLetters()
+	{
+		
+	}
+	
+	
+	public List<String> getConfirmedWords() {
+		return confirmedWords;
+	}
+	public void setConfirmedWords(List<String> confirmedWords) {
+		this.confirmedWords = confirmedWords;
+	}
+	public List<String> getPermutations() {
+		return permutations;
+	}
+	public void setPermutations(List<String> permutations) {
+		this.permutations = permutations;
+	}
+
+	
+	
+
+} // End of the CollectionOfLetters class

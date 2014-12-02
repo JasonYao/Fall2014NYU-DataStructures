@@ -1,0 +1,38 @@
+
+
+public class TwoWayNode <E>
+{
+	// Global Attributes
+	private E data;
+	private TwoWayNode<E> next;
+	private TwoWayNode<E> previous;
+	
+	// Constructor
+	public TwoWayNode (E data )
+	{
+		this.data = data;
+		next = null;
+		previous = null;
+	}
+	
+	private static <E> void enqueue (E item)
+	{
+	// Creates a new node
+	TwoWayNode<E> newTail = new TwoWayNode<E>(item);
+
+	// Points the current tail’s next node to be a new node 
+	getTail().setNext(newTail);
+
+	} 
+
+	E <E> dequeue ()
+	{
+
+	}
+
+	
+	
+	
+	
+}
+

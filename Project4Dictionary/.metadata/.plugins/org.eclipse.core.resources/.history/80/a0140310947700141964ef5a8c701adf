@@ -1,0 +1,59 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+/**
+ * 
+ */
+
+/**
+ * This class is to represent the Find Words Game, in which given a 
+ * user's input, and a file output path in the commandline arguments,
+ * outputs all possible combinations and permutations of the words
+ * @author Jason
+ *
+ */
+public class FindWordsGame
+{
+	/**
+	 * @param args Commandline argument: directory path to 
+	 */
+	public static void main(String[] args)
+	{
+		PrintWriter pwOutput = null;
+		try
+		{
+			// ---------- START OF FILE INPUT/OUTPUT PARSING ----------
+			// Check 1: Checks to see if there is only 1 argument	
+			if (args.length != 1)
+			{throw new InvalidCommandLineArgumentException();}
+
+			// Check 2.2: Checks to see if the file output exists
+			File postfixOutput = new File(args[0]); 
+			if (!postfixOutput.isFile())
+			{throw new FileNotFoundException("Error: The output file is missing or is a directory");}
+
+
+
+		} // End of the try block
+		catch (InvalidCommandLineArgumentException e)
+		{
+			System.err.println("Error: Invalid number of "
+					+ "commandline arguments, please only have one"
+					+ " argument in the commandline");
+		} // End of the catch block
+		catch(FileNotFoundException e)
+		{
+			System.err.println(e.getMessage());
+		}
+		finally
+		{
+
+		} // End of the finally block
+
+
+		// TODO Auto-generated method stub
+
+	} // End of the main method
+
+} // End of the FindWordsGame Class

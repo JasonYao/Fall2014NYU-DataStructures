@@ -1,0 +1,178 @@
+/**
+ * 
+ */
+
+/**
+ * AVLNode class is used to represent nodes in a self-balancing binary search tree.
+ * It contains a data item that has to implement Comparable interface
+ * and references to left and right subtrees. 
+ * @author Jason
+ * @param <E> a reference type that implements Comparable<E> interface 
+ * NOTE: Based off of the Lecture 6 sourcecode, by Joanna Klukowska
+ */
+public class AVLNode <E extends Comparable<E>> implements Comparable<AVLNode<E>>
+{
+	//reference to the left subtree 
+	private AVLNode <E> left;
+	//reference to the right subtree
+	private AVLNode <E> right;
+	//data item stored in the node
+	private E data;
+	// The height of the node in the tree
+	private int height;
+
+	/**
+	 * Constructs a BSTNode initializing the data part 
+	 * according to the parameter and setting both 
+	 * references to subtrees to null.
+	 * @param data
+	 *    data to be stored in the node
+	 */
+	public AVLNode(E data) {
+		this.data = data;
+		left = null;
+		right = null;
+	}
+
+	/**
+	 * Constructs a BSTNode initializing the data part
+	 * and the subtree references according to the parameters.
+	 * @param data
+	 *    data to be stored in the node
+	 * @param left
+	 *    reference to the left subtree
+	 * @param right
+	 *    reference to the right subtree
+	 */
+	public AVLNode( E data, AVLNode<E> left, AVLNode<E> right) {
+		this.left = left;
+		this.right = right;
+		this.data = data;
+	}
+
+	/**
+	 * TODO
+	 * @return
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * TODO
+	 * @param height
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	/**
+	 * Left subtree accessor. 
+	 * @return 
+	 *    reference to the left subtree of a node
+	 */
+	public AVLNode<E> getLeft() {
+		return left;
+	}
+
+	/**
+	 * Changes the reference to the left subtree to the one 
+	 * specified in the parameter.
+	 * @param 
+	 *    reference to the new left subtree of the node.
+	 */
+	public void setLeft(AVLNode<E> left) {
+		this.left = left;
+	}
+
+	/**
+	 * Right subtree accessor. 
+	 * @return 
+	 *    reference to the right subtree of a node
+	 */
+	public AVLNode<E> getRight() {
+		return right;
+	}
+
+	/**
+	 * Changes the reference to the right subtree to the one 
+	 * specified in the parameter.
+	 * @param 
+	 *    reference to the new right subtree of the node.
+	 */
+	public void setRight(AVLNode<E> right) {
+		this.right = right;
+	}
+
+	/**
+	 * Returns a reference to the data stored in the node. 
+	 * @return 
+	 *    reference to the data stored in the node
+	 */
+	public E getData() {
+		return data;
+	}
+	/**
+	 * Changes the data stored in the node to the one 
+	 * specified in the parameter.
+	 * @param 
+	 *    reference to the new data of the node
+	 */
+	public void setData(E data) {
+		this.data = data;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(AVLNode<E> other) {
+		return this.data.compareTo(other.data);
+	} 
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return data.toString();
+	}
+	
+	/**
+	 * TODO
+	 * @param n
+	 * @return
+	 */
+	public int balanceFactor(AVLNode<E> n)
+	{
+		if (n.getRight() == null)
+		{return - n.getHeight();}
+		if (n.getLeft() == null)
+		{return n.getHeight();}
+		return n.getRight().getHeight() - n.getLeft().getHeight();
+	} // End of the balanceFactor method
+	
+	public void updateHeight(AVLNode<E> n)
+	{
+		// Checks if node is a leaf
+		if (n.getLeft() == null && n.getRight() == null)
+		{n.setHeight(0);}
+		// Checks if the node has a right child ONLY
+		else if (n.getLeft() == null && n.getRight() != null)
+		{n.setHeight(n.getRight().getHeight() + 1);}
+		// Checks if the node has a left child ONLY
+		else if (n.getRight() == null && n.getLeft() != null)
+		{n.setHeight(n.getLeft().getHeight() + 1);}
+		// Otherwise, it has two children
+		else
+		{
+			
+		}
+		
+		// Otherwise
+	} // End of the updateHeight method
+	
+	
+	
+	
+} // End of the AVLNode class

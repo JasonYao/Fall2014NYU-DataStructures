@@ -1,0 +1,48 @@
+/**
+ * 
+ * @author Jason
+ * @param <E>
+ */
+public interface Stack<E>
+{	
+	/**
+	 * Add an object to the top of the stack
+	 * @param item character to be added to 
+	 */
+	public static <E> void push(E item)
+	{
+		
+	} // End of the push method
+	
+	/**
+	 * Remove and returns an object from the top of the stack
+	 * @return Returns an object from the top and the stack, removing it from the stack. If the stack is empty, null is returned
+	 */
+	public static <E> E pop()
+	{
+		return null;
+		
+	} // End of the pop method
+	
+	/**
+	 * Returns an object from the top of the stack
+	 * @return Returns an object from the top of the stack. If the stack is empty, returns null.
+	 */
+	public static <E> E peek()
+	{
+		return null;
+		
+		
+	} // End of the peek method
+	
+	/**
+	 * Produces a string representation of the stack.
+	 * @return Returns a String object that contains all elements stored on the stack. The elements are separated by spaces.
+	 * 		The top of the stack is the rightmost character in the returned string.
+	 */
+	public <E> String toString()
+	{
+		
+	} // End of the toString method
+
+} // End of the Stack Class

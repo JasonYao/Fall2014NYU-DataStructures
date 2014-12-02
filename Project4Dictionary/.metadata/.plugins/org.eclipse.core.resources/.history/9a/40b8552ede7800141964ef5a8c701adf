@@ -1,0 +1,32 @@
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * 
+ */
+
+/**
+ * @author Jason
+ *
+ */
+public class CollectionOfLetters
+{
+	// Global Attributes
+	private ArrayList<String> permutations = new ArrayList<String>();
+	
+	public CollectionOfLetters(String sanitizedUserInput)
+	{
+		
+	}
+	
+	public List<String> getPermutations() {
+		return permutations;
+	}
+	public void setPermutations(ArrayList<String> permutations) {
+		this.permutations = permutations;
+	}
+
+	
+	
+
+} // End of the CollectionOfLetters class

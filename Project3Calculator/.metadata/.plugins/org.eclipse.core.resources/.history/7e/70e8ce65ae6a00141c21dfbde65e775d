@@ -1,0 +1,172 @@
+import java.util.Scanner;
+
+/**
+ * 
+ */
+
+/**
+ * Class that provides the methods for infix-to-postfix conversion and for postfix evaluation
+ * @author Jason
+ *
+ */
+public abstract class ExpressionTools
+{
+	/**
+	 * Note: This code was taken and adapted from the class daily code, lecture 5: ADT
+	 * @author Dale/Joyce/Weems
+	 * @return 
+	 * @throws PostFixException Throws an exception when it is not a valid expression
+	 */
+	public static int postfixEvaluator(String expression) throws PostFixException
+	{
+		Stack<Integer> stack = new Stack<Integer>();
+
+		int value;
+		String operator;
+
+		int operand1;
+		int operand2;
+
+		int result = 0;
+
+		Scanner tokenizer = new Scanner(expression);
+
+		while (tokenizer.hasNext()) {
+			if (tokenizer.hasNextInt()) {
+				// Process operand.
+				value = tokenizer.nextInt();
+
+				stack.push(value);
+			} else {
+				// Process operator.
+				operator = tokenizer.next();
+
+				// Obtain second operand from stack.
+				if (stack.isEmpty()) {
+					tokenizer.close();
+					throw new PostFixException(
+							"Not enough operands - stack underflow");
+				}
+				operand2 = stack.peek();
+				stack.pop();
+
+				// Obtain first operand from stack.
+				if (stack.isEmpty()) {
+					tokenizer.close();
+					throw new PostFixException(
+							"Not enough operands - stack underflow");
+				}
+				operand1 = stack.peek();
+				stack.pop();
+
+				// Perform operation.
+				if (operator.equals("/"))
+					result = operand1 / operand2;
+				else if (operator.equals("*"))
+					result = operand1 * operand2;
+				else if (operator.equals("+"))
+					result = operand1 + operand2;
+				else if (operator.equals("-"))
+					result = operand1 - operand2;
+				else {
+					tokenizer.close();
+					throw new PostFixException("Illegal symbol: " + operator);
+				}
+
+				// Push result of operation onto stack.
+				stack.push(result);
+			}
+		}
+
+		tokenizer.close();
+
+		// Obtain final result from stack.
+		if (stack.isEmpty())
+			throw new PostFixException("Not enough operands - stack underflow");
+		result = stack.peek();
+		stack.pop();
+
+		// Stack should now be empty.
+		if (!stack.isEmpty())
+			throw new PostFixException("Too many operands - operands left over");
+
+		// Return the final.
+		return result;
+	}
+	
+	
+	
+	
+	
+	public static String convertInfixToPostfix2 (String infix) throws PostFixException
+	{
+		for (each token in the input infix string expression)
+		{
+			if (the token is an operand)
+			{
+				append to postfix string expression
+			}
+			else if (the token is a left brace)
+			{
+				push it onto the operator stack
+			}
+			else if (the token is an operator)
+			{
+				if (the stack is not empty)
+				{
+					while (top element on the stack has higher precedence)
+					{
+						pop the stack and append to postfix string expression
+					}
+				}
+				push it (the current operator) onto the operator stack
+			}
+			else if (the token is a right brace)
+			{
+				while (the operator stack is not empty)
+				{
+					if (the top of the operator stack is not a matching left brace)
+					{
+						pop the operator stack and append to postfix string expression
+					}
+					else
+					{
+						pop the left brace and discard
+						break;
+					}
+				}
+			}
+		}
+		while (the operator stack is not empty)
+		{
+			pop the operator stack and append to postfix string expression
+		}
+
+	} // End of the convertInfixToPostfix method
+
+	public static void postfixEvaluation ()
+	{
+		try
+		{
+
+			Scan the given postfix expression from left to right
+			if the token is an operand
+			push it (its value) onto a stack
+			else if the token is an operator
+			operand2 = pop stack
+			operand1 = pop stack
+			compute operand1 operator operand2
+			push result onto stack
+			return top of the stack as results
+
+					if ()
+					{
+						throw new PostFixException();
+					}
+		}
+		catch (PostFixException e)
+		{
+
+		}
+	} // End of the postfixEvaluation method
+}

@@ -1,0 +1,13 @@
+/**
+ * 
+ */
+
+/**
+ * AVLNode class is used to represent nodes in a self-balancing binary search tree.
+ * @author Jason
+ *
+ */
+public class AVLNode 
+{
+
+}

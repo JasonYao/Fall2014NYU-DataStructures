@@ -1,0 +1,37 @@
+/**
+ * 
+ */
+
+/**
+ * This class provides representation of an AVL self-balancing binary search tree.
+ * @author Jason
+ *
+ */
+public class AVLTree
+{
+	//root of the tree
+	private AVLNode<T> root;
+	//current number of nodes in the tree
+	private int numOfElements;
+
+	//queue used for implementation of some of the methods below
+	private Queue<T> queue;
+
+
+
+	/**
+	 * Instantiates an empty tree
+	 */
+	public AVLTree ()
+	{
+
+	}
+
+	/**
+	 * Instantiates a tree with a node
+	 */
+	public <E> AVLTree(AVLNode<E> newNode)
+	{
+
+	}
+} // End of the AVLTree class

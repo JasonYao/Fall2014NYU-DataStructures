@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+
+/**
+ * Creates a self-balancing tree
+ * @author Jason
+ *
+ */
+public class AVLTree
+{
+
+	public AVLTree ()
+	{
+		
+	}
+}

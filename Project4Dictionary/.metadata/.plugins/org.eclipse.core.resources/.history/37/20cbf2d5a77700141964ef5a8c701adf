@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+
+/**
+ * A Dictionary object that holds a list of words from a dictionary file input
+ * @author Jason
+ *
+ */
+public class Dictionary
+{
+
+	public Dictionary(File inputDictionary)
+	{
+		
+	}
+	
+	
+}

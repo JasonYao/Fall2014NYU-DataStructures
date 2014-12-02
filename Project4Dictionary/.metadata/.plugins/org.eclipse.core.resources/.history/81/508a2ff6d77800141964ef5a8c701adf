@@ -1,0 +1,36 @@
+/**
+ * 
+ */
+
+/**
+ * This class provides representation of an AVL self-balancing binary search tree.
+ * @author Jason Yao
+ * @author Joanna Klukowska
+ * NOTE: The following code was taken from the Lecture 6 notes on BST trees, and adapted for the
+ * purposes of this assignment.
+ */
+public class AVLTree <T extends Comparable<T>>
+{
+	// Root of the tree
+	private AVLNode<T> root;
+	// Current number of nodes in the tree
+	private int numOfElements;
+	// Queue used for implementation of some of the methods below
+	private Queue<T> queue;
+
+	/**
+	 * Instantiates an empty tree
+	 */
+	public AVLTree ()
+	{this.root = null;
+	numOfElements = 0;}
+
+	/**
+	 * Add the given data item to the tree. If item is null, the tree does not change.
+	 * @param item the new element to be added to the tree
+	 */
+	public void insert(T data)
+	{
+		
+	}
+} // End of the AVLTree class

@@ -1,0 +1,27 @@
+/**
+ * 
+ */
+
+/**
+ * Creates a self-balancing tree
+ * @author Jason
+ *
+ */
+public class AVLTree
+{
+	/**
+	 * Instantiates an empty tree
+	 */
+	public AVLTree ()
+	{
+		
+	}
+	
+	/**
+	 * Instantiates a tree with a node
+	 */
+	public <E> AVLTree(AVLNode<E> newNode)
+	{
+		
+	}
+} // End of the AVLTree class
