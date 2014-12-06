@@ -1,22 +1,18 @@
 /**
- * 
- */
-
-/**
  * AVLNode class is used to represent nodes in a self-balancing binary search tree.
  * It contains a data item that has to implement Comparable interface
  * and references to left and right subtrees. 
- * @author Jason
+ * @author Jason Yao
  * @param <E> a reference type that implements Comparable<E> interface 
  * NOTE: Based off of the Lecture 6 sourcecode, by Joanna Klukowska
  */
 public class AVLNode <E extends Comparable<E>> implements Comparable<AVLNode<E>>
 {
-	//reference to the left subtree 
+	// Reference to the left subtree 
 	private AVLNode <E> left;
-	//reference to the right subtree
+	// Reference to the right subtree
 	private AVLNode <E> right;
-	//data item stored in the node
+	// Data item stored in the node
 	private E data;
 	// The height of the node in the tree
 	private int height;
@@ -76,9 +72,7 @@ public class AVLNode <E extends Comparable<E>> implements Comparable<AVLNode<E>>
 	 * @param left The reference to the new left subtree of the node
 	 */
 	public void setLeft(AVLNode<E> left)
-	{this.left = left;
-	//this.height = Math.max(left.getHeight(), right.getHeight()) + 1; TODO
-	} // End of the setLeft method
+	{this.left = left;} // End of the setLeft method
 
 	/**
 	 * [Accessor Method] An accessor method to get the reference to the right subtree
@@ -92,9 +86,7 @@ public class AVLNode <E extends Comparable<E>> implements Comparable<AVLNode<E>>
 	 * @param right The reference to the new left subtree of the node
 	 */
 	public void setRight(AVLNode<E> right)
-	{this.right = right;
-	//this.height = Math.max(left.getHeight(), right.getHeight()) + 1; TODO
-	} // End of the setRight method
+	{this.right = right;} // End of the setRight method
 
 	/**
 	 * [Accessor Method] An accessor method to get the reference to the data stored in the node
@@ -102,13 +94,13 @@ public class AVLNode <E extends Comparable<E>> implements Comparable<AVLNode<E>>
 	 */
 	public E getData()
 	{return data;} // End of the getData method
+
 	/**
 	 * [Mutator Method] A mutator method to change the data inside the node
 	 * @param data The reference to the new data of the node
 	 */
 	public void setData(E data)
 	{this.data = data;} // End of the setData method
-
 
 	/**
 	 * An override of the compareTo method

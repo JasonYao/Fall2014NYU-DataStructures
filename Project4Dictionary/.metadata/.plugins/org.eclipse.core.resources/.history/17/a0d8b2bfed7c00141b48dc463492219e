@@ -1,0 +1,33 @@
+/**
+ * 
+ */
+
+/**
+ * @author Jason
+ * @param <T>
+ *
+ */
+public class StringAVL extends AVLTree<String>
+{
+
+	/**
+	 * Constructor call to the parent's constructor to make a new AVLTree<String>
+	 */
+	public StringAVL()
+	{super();} // End of constructor to make an empty StringAVL
+	
+	/**
+	 * A public wrapper method to see whether the StringAVL contains the prefix
+	 * @param prefix The prefix that is being checked
+	 * @return Returns true if the prefix is found in the StringAVL, false if not found
+	 */
+	public boolean containsPrefix(String prefix)
+	{
+		AVLNode<String> current = root;
+		return recContainsPrefix(prefix, current);
+		
+		
+		return true;
+	} // End of the containsPrefix method
+
+} // End of the StringAVL Class

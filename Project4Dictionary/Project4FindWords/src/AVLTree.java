@@ -13,11 +13,25 @@ import java.util.Queue;
 public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 {
 	// Root of the tree
-	private AVLNode<T> root;
+	protected AVLNode<T> root; // protected so that AVLString will inherit
 	// Current number of nodes in the tree
 	private int numOfElements;
 	// Queue used for implementation of some of the methods below
 	private Queue<T> queue;
+
+	/**
+	 * [Accessor Method] An accesspr method that returns the number of elements in the AVL tree
+	 * @return Returns the number of elements in the tree
+	 */
+	public int getNumOfElements()
+	{return numOfElements;} // End of the getNumOfElements method
+
+	/**
+	 * [Accessor Method] An accessor method that returns the root node of the AVL tree
+	 * @return Returns an AVLNode reference to the root of the tree
+	 */
+	public AVLNode<T> getRoot()
+	{return root;} // End of the getRoot method
 
 	/**
 	 * [Constructor] Instantiates an empty tree
@@ -28,7 +42,7 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 
 	/**
 	 * Public wrapper method for finding if the tree contains a data-point in the tree
-	 * @return Returns true if the 
+	 * @return Returns true if the data is found inside the tree
 	 */
 	public boolean contains(T data)
 	{return recContains(data, root);} // End of the wrapper method for the contains method
@@ -61,7 +75,7 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 	 */
 	public void insert(T data)
 	{
-		if (data!=null)
+		if (data != null)
 		{root = recInsert(data, root);}
 	} // End of the insert wrapper method
 
@@ -73,85 +87,64 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 	 */
 	private AVLNode<T> recInsert(T data, AVLNode<T> tree)
 	{
+		// Step 1: Normal BST inserting algorithm
 		if (tree == null)
 		{// Additional place found
 			tree = new AVLNode<T>(data);
 			numOfElements++; // Increments the number of elements in the tree	
-			// TODO for testing
-			System.out.println("Node was added to the tree");
+			return tree;
 		} // End of if the initial tree was empty
 		else if (data.compareTo(tree.getData()) <= 0)
 		{// Add in left subtree
-			tree.setLeft(recInsert(data, tree.getLeft()));
-		// TODO for testing
-			System.out.println("Node was transfered to the left");
-		}
+			tree.setLeft(recInsert(data, tree.getLeft()));}
 		else if (data.compareTo(tree.getData()) > 0)
 		{// Add in right subtree
-			tree.setRight(recInsert(data, tree.getRight()));
-			// TODO for testing
-			System.out.println("Node was transfered to the right");	
-		}
-		// Makes sure that the tree is not balanced TODO
-//		if (balanceFactor(tree) == 2 || balanceFactor(tree) == -2)
-//		{// Rebalances the tree
-//			tree = rebalance(tree);}
+			tree.setRight(recInsert(data, tree.getRight()));} // End of the normal BST insertion
+
+		// Step 2: Starting from the current node, adjusts the current height
+		updateHeight(tree);
+
+		// Step 3: Checks the balance factor of the node, applies rotation depending on imbalance
+		tree = rebalance(tree);
+
+		// Continues up the tree, or returns if at the top
 		return tree;
 	} // End of the recursive insert method
 
 	/**
 	 * [Helper Method]: A method that rebalances an imbalance in the tree
 	 * @param tree The original root of the tree
+	 * @return Returns the root of the new tree
 	 */
 	private AVLNode<T> rebalance(AVLNode<T> tree)
 	{
-		int imbalanceRotation = checkBalance(tree);
-		AVLNode<T> newRoot = null;
-		// Checks if the tree has an LL imbalance
-		if (imbalanceRotation == 0)
-			newRoot = balanceLL(tree);
-		// Checks if the tree has an RR imbalance
-		else if (imbalanceRotation == 1)
-			newRoot = balanceRR(tree);
-		// Checks if the tree has an LR imbalance
-		else if (imbalanceRotation == 2)
-			newRoot = balanceLR(tree);
-		// Checks if the tree has an RL imbalance
-		else if (imbalanceRotation == 3)
-			newRoot = balanceRL(tree);
-		return newRoot;
+		int imbalanceRotation = balanceFactor(tree);
+		AVLNode<T> finalRoot = tree;
+		if (imbalanceRotation == 2)
+		{
+			AVLNode<T> NodeB = tree.getLeft();
+			int subBalanceFactor = balanceFactor(NodeB);
+
+			// Checks if the imbalance is LL
+			if (subBalanceFactor == 1)
+			{finalRoot = balanceLL(tree);}
+			// Checks if the imbalance is LR
+			else
+			{finalRoot = balanceLR(tree);}
+		} // End of the check for a balanceFactor of 2
+		else if (imbalanceRotation == -2)
+		{
+			AVLNode<T> NodeB = tree.getRight();
+			int subBalanceFactor = balanceFactor(NodeB);
+			// Checks if the imbalance is RR
+			if (subBalanceFactor == -1)
+			{finalRoot = balanceRR(tree);}
+			// Checks if the imbalance is RL
+			else
+			{finalRoot = balanceRL(tree);}
+		} // End of the check for a balanceFactor of -2
+		return finalRoot;
 	} // End of the rebalance method
-
-	/**
-	 * [Helper Method]: A helper method to help determine which rotational imbalance is there
-	 * @param tree The root of the subtree that has that imbalance
-	 * @return Returns 0 for an LL imbalance, 1 for RR, 2 for LR, 3 for RL imbalance, -1 for no imbalance
-	 */
-	private int checkBalance(AVLNode<T> nodeA)
-	{
-		AVLNode<T> nodeB = nodeA.getLeft();
-		// Checks for LL imbalance TODO
-		if (nodeB.getHeight() + 1 - nodeA.getRight().getHeight() == 2)
-		{return 0;}
-		nodeB = nodeA.getRight();
-		// Checks for RR imbalance
-		if (nodeB.getHeight() + 1 - nodeA.getLeft().getHeight() == 2)
-		{return 1;}
-		nodeB = nodeA.getLeft();
-		AVLNode<T> nodeC = nodeB.getRight();
-		// Checks for LR imbalance
-		if (nodeB.getHeight() - nodeA.getRight().getHeight() == 2 &&
-				nodeC.getHeight() - nodeB.getLeft().getHeight() == 1)
-		{return 2;}
-
-		nodeB = nodeA.getRight();
-		nodeC = nodeB.getLeft();
-		// Checks for RL imbalance
-		if (nodeB.getHeight() - nodeA.getLeft().getHeight() == 2 &&
-				nodeC.getHeight() - nodeB.getRight().getHeight() == 1)
-		{return 3;}
-		return -1; // Else there is no imbalance, returns -1
-	} // End of the checkBalance method
 
 	/**
 	 * Wrapper method to remove the item from the tree. 
@@ -166,13 +159,14 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 	} // End of the wrapper of the remove method
 
 	/**
-	 * 
+	 * Recursive method to remove the item from the tree
 	 * @param data data that is to be removed
 	 * @param tree root of the subtree from which the item will be removed
 	 * @return Returns the reference to the AVL Node after the data was removed
 	 */
 	private AVLNode<T> recRemove(T data, AVLNode<T> tree)
 	{
+		// Step 1: Normal BST Remove
 		if (tree == null)
 			; // do nothing, item not found
 		else if (data.compareTo(tree.getData()) < 0)
@@ -180,24 +174,35 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 		else if (data.compareTo(tree.getData()) > 0)
 			tree.setRight(recRemove(data, tree.getRight()));
 		else
-			tree = removeNode(tree); // Node is removed
-		// Makes sure that the tree is not balanced
-		if (balanceFactor(tree) == 2 || balanceFactor(tree) == -2)
-		{// Rebalances the tree
-			tree = rebalance(tree);}
+		{tree = removeNode(tree);} // Node is removed
+
+		// Step 2: Starting from the current node, adjusts the current height
+		updateHeight(tree);
+
+		// Step 3: Checks the balance factor of the node, applies rotation depending on imbalance
+		tree = rebalance(tree);
+
 		return tree;
 	} // End of the recursive remove method
 
 	/**
-	 * TODO 
-	 * @param tree
-	 * @return
+	 * Removes the targeted node inside the tree
+	 * @param tree The node that is to be removed
+	 * @return Returns the node's replacement if it has children
 	 */
 	private AVLNode<T> removeNode(AVLNode<T> tree)
 	{
 		T data;
+
+		// Checks if the tree does not have any children
+		if (tree.getLeft() == null && tree.getRight() == null)
+		{
+			numOfElements--;
+			return null;
+		}
+
 		// Checks if the tree does not have a left child
-		if (tree.getLeft() == null) {
+		else if (tree.getLeft() == null) {
 			numOfElements--;
 			return tree.getRight();
 		}
@@ -296,7 +301,8 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 	 * Determines the number of elements stored in this BST. 
 	 * @return number of elements in this BST
 	 */
-	public int size() {return this.numOfElements;} // End of the size method
+	public int size()
+	{return this.numOfElements;} // End of the size method
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -314,7 +320,7 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 	 * @param s the string that accumulated the string representation
 	 * of this BST
 	 */
-	private void inOrderPrint(AVLNode<T> tree, StringBuilder s)
+	public void inOrderPrint(AVLNode<T> tree, StringBuilder s)
 	{
 		if (tree != null) {
 			inOrderPrint(tree.getLeft(), s);
@@ -324,42 +330,109 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T>
 	} // End of the inOrderPrint method
 
 	/**
-	 * TODO
-	 * @param data
-	 * @return
-	 */
-	public <E> E binarySearch(E data)
-	{return data;} // TODO
-
-	/**
-	 * TODO
+	 * Iterates through the AVL tree
 	 */
 	@Override
 	public Iterator<T> iterator()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	} // End of the iterator method
+	{return new AVLIterator();} // End of the iterator method
 
 	/**
-	 * TODO
-	 * @param n
-	 * @return
+	 * An iterator class that will be used with the AVL tree
+	 */
+	private class AVLIterator implements Iterator<T>
+	{
+		// NOTE: Thanks to Princeton.edu for giving me the idea
+		//to use a stack to hold the nodes as we go through
+		private Stack<AVLNode<T>> stack;
+
+		/**
+		 * Default constructor instantiates the stack required for tree traversal, and begins to push the stack
+		 */
+		public AVLIterator()
+		{
+			this.stack = new Stack<AVLNode<T>>();
+			pushTreeLeft(root);
+		} // End of the constructor
+
+		/**
+		 * A method that pushes all left nodes into the stack, saving them and allowing them to be used later
+		 * to traverse the tree
+		 * @param current The current Node being added to the stack
+		 */
+		private void pushTreeLeft(AVLNode<T> current)
+		{
+			while (current != null)
+			{
+				stack.push(current);
+				current = current.getLeft();
+			}
+		} // End of the pushTreeLeft method
+
+		/**
+		 * As the stack itself holds references to the tree nodes now, it allows for
+		 * the stack to determine the number of potential nexts
+		 * @returns Returns true if the current node has a next node, false if not
+		 */
+		public boolean hasNext()
+		{return !stack.isEmpty();} // End of the hasNext method
+
+		/**
+		 * NOTE: REMOVE METHOD IS NOT IMPLEMENTED AS JOANNA STATED IN CLASS
+		 */
+		public void remove ()
+		{// Does nothing
+		} // End of the remove method
+
+		/**
+		 * NOTE: DO NOT ALLOW THIS METHOD TO BE USED WITHOUT A WRAPPER .hasNext() method,
+		 * if you do terrible things will happen to your face, worse than it already is
+		 * @return Returns the data value of the next node in the tree
+		 */
+		public T next()
+		{
+			AVLNode<T> current = stack.pop();
+			pushTreeLeft(current.getRight());
+			return current.getData();
+		} // End of the next method
+	} // End of the AVLIterator class
+
+
+	/**
+	 * [Helper Method] A helper method to help compute the balanceFactor of the node, to see if it needs to be rotated
+	 * @param n The node that is currently being checked for imbalances among its children
+	 * @return Returns an integer value between -2 and 2
 	 */
 	private int balanceFactor(AVLNode<T> n)
-	{
-		if (n.getRight() == null)
-		{return - n.getHeight();}
-		if (n.getLeft() == null)
-		{return n.getHeight();}
-		return n.getRight().getHeight() - n.getLeft().getHeight();
+	{		
+		int finalBalanceFactor;
+		// Has no children
+		if (n.getLeft() == null && n.getRight() == null)
+		{
+			finalBalanceFactor = 0;
+			return finalBalanceFactor;}
+		// Only has left child
+		if (n.getRight() == null && n.getLeft() != null)
+		{	
+			finalBalanceFactor =  n.getLeft().getHeight() + 1;
+			//System.out.println("Left Height: The balance factor of the current node is " + finalBalanceFactor);
+			return finalBalanceFactor;}
+		// Only has right child
+		if (n.getLeft() == null && n.getRight() != null)
+		{
+			finalBalanceFactor = -1 * (n.getRight().getHeight() + 1);
+			//System.out.println("Right Height: The balance factor of the current node is " + finalBalanceFactor);
+			return finalBalanceFactor;}
+		// Else it has two children
+		finalBalanceFactor = (n.getLeft().getHeight()) - (n.getRight().getHeight());
+		//System.out.println("Right-left: The balance factor of the current node is " + finalBalanceFactor);
+		return finalBalanceFactor;
 	} // End of the balanceFactor method
 
 	/**
-	 * TODO
-	 * @param n
+	 * Updates the height of a node inside the AVL tree
+	 * @param n The node whose height is currently being updated
 	 */
-	public void updateHeight(AVLNode<T> n)
+	private void updateHeight(AVLNode<T> n)
 	{
 		// Checks if node is a leaf
 		if (n.getLeft() == null && n.getRight() == null)

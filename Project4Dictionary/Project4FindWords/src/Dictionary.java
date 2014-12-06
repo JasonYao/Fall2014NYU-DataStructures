@@ -1,19 +1,34 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
- */
-
-/**
  * A Dictionary object that holds a list of words from a dictionary file input
- * @author Jason
- *
+ * @author Jason Yao
  */
 public class Dictionary
 {
-	private AVLTree<String> dictionaryTree = null;
+	// Stores the dictionary in an AVL tree
+	private StringAVL dictionaryTree = null;
+
+	public Dictionary(ArrayList<String> inputDictionary)
+	{
+		// Creates a new empty dictionary AVL tree
+		this.dictionaryTree = new StringAVL();
+
+		// Utilizes a while loop to add each line of the file to the AVL tree
+		for (int i = 0; i < inputDictionary.size(); ++i)
+		{
+			// Takes the next line
+			String current = inputDictionary.get(i);
+
+			// Passes the data to be changed into node, then added to the tree
+			dictionaryTree.insert(current);
+		}
+		// AVL Tree is complete
+
+	} // End of the ArrayList Dictionary
 
 	/**
 	 * Instantiates new Dictionary objects based upon a dictionary input file
@@ -28,7 +43,7 @@ public class Dictionary
 			dictionaryScanner = new Scanner(inputDictionary);
 
 			// Creates a new empty dictionary AVL tree
-			this.dictionaryTree = new AVLTree<String>();
+			this.dictionaryTree = new StringAVL();
 
 			// Utilizes a while loop to add each line of the file to the AVL tree
 			while (dictionaryScanner.hasNextLine())
@@ -38,11 +53,7 @@ public class Dictionary
 
 				// Passes the data to be changed into node, then added to the tree
 				dictionaryTree.insert(current);
-				
-				// TODO For testing only
-				//System.out.println("The word " + current + " has been added to the tree");
 			}
-
 			// AVL Tree is complete, closes the scanner
 			dictionaryScanner.close();
 
@@ -68,7 +79,7 @@ public class Dictionary
 	 * [ Mutator method] Mutator method for the Dictionary's AVL tree 
 	 * @param dictionaryTree Requires a new AVLTree to replace the old one
 	 */
-	public void setDictionaryTree(AVLTree<String> dictionaryTree)
+	public void setDictionaryTree(StringAVL dictionaryTree)
 	{this.dictionaryTree = dictionaryTree;} // End of the setDictionaryTree mutator method
 
 	/**
@@ -78,4 +89,32 @@ public class Dictionary
 	 */
 	public boolean contains(String expression)
 	{return dictionaryTree.contains(expression);} // End of the contains method for the dictionary class
+
+	/**
+	 * A public wrapper method meant to wrap the normal tree's containsPrefix method for brevity
+	 * @param prefix The prefix that is being searched in the dictionary 
+	 * @return Returns true if the prefix was found in the tree, false if not
+	 */
+	public boolean containsPrefix(String prefix)
+	{return dictionaryTree.containsPrefix(prefix);} // End of the containsPrefix method for the dictionary class
+
+	/**
+	 * NOTE: Code is from Joanna's implementation of Project 1
+	 * @author Joanna Klukowska
+	 * Creates a new Dictionary object from this Dictionary object that 
+	 * contains words of a specified size.
+	 * @param size length of the words that should be included in the new 
+	 * Dictionary object
+	 * @return a new Dictionary object containing only the words of specified 
+	 * size
+	 */
+	public Dictionary getWordsBySize ( int size )
+	{
+		ArrayList <String> wordsBySize = new ArrayList<String> ();
+
+		for (String words : dictionaryTree)
+			if (words.length() == size)
+				wordsBySize.add(words);
+		return new Dictionary (wordsBySize);
+	} // End of the getWordsBySize method
 } // End of the Dictionary class

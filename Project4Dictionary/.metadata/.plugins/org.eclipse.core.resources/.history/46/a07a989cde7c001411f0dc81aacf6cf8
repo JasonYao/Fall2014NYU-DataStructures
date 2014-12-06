@@ -1,0 +1,23 @@
+/**
+ * 
+ */
+
+/**
+ * @author Jason
+ *
+ */
+public class StringAVL extends AVLTree<String>
+{
+
+	/**
+	 * Constructor call to the parent's constructor to make a new AVLTree<String>
+	 */
+	public StringAVL()
+	{super();} // End of constructor to make an empty StringAVL
+	
+	public boolean containsPrefix()
+	{
+		return true;
+	} // End of the containsPrefix method
+
+} // End of the StringAVL Class

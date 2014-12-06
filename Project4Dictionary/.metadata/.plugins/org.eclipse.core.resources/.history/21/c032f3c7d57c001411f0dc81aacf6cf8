@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+
+/**
+ * @author Jason
+ *
+ */
+public class StringAVL extends AVLTree<String> {
+
+	/**
+	 * 
+	 */
+	public StringAVL() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
