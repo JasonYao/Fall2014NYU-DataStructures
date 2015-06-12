@@ -1,2 +1,0 @@
-INDEX VERSION 1.127+/Users/Jason/Documents/New York University/Sophomore Year - Fall/Fall2014NYU-DataStructures/Project3Calculator/.metadata/.plugins/org.eclipse.jdt.core
-2885857815.index

@@ -1,5 +1,0 @@
-package codingHelp;
-
-public class GenericNode<T> {
-
-}
