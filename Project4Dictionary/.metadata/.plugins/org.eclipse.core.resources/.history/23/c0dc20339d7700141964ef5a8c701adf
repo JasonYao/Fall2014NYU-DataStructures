@@ -1,9 +1,0 @@
-
-public class InvalidUserInputException extends Exception
-{
-	public InvalidUserInputException()
-	{super();}
-	
-	public
-
-} // End of the InvalidUserInputException

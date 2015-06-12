@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename compilation unit &apos;WordFindingProgram.java&apos; to &apos;FindWordsGame.java&apos;&#x0A;- Original project: &apos;Project1WordSearch&apos;&#x0A;- Original element: &apos;WordFindingProgram.java&apos;&#x0A;- Renamed element: &apos;FindWordsGame.java&apos;" description="Rename compilation unit &apos;WordFindingProgram.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{WordFindingProgram.java" name="FindWordsGame.java" references="false" stamp="1411347184392" version="1.0"/>
-</session>
