@@ -9,6 +9,18 @@ import java.lang.reflect.Array;
  */
 public class ArraySortTools {	
 	
+	public static <E extends Comparable<E>> E[] insertionSort(E[] array)
+	{
+		
+		
+		
+		
+		
+		return array;
+	} // End of the insertion sort
+	
+	
+	
 	/**
 	 * Prevents the class from instantiating an object
 	 */

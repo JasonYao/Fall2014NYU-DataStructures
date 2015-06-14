@@ -16,9 +16,9 @@ public class SortAlgorithmBenchmarking {
 	public static void main(String[] args)
 	{	
 		// Generates a pseudo-random array of doubles
-		// NOTE: As generics can't deal with primitives, we use Double instead. This also greatly lowers the possibility of lots of repeated elements,
-		// since it's all Doubles
-		Double[] inputArray = new Double[10000];
+		// NOTE: As generics can't deal with primitives, we use Double instead.
+		// This also greatly lowers the possibility of lots of repeated elements, since it's all Doubles
+		Double[] inputArray = new Double[10];
 
 		// Populating the array
 		for (int i = 0; i < inputArray.length; ++i)
@@ -69,6 +69,19 @@ public class SortAlgorithmBenchmarking {
 		double quickSortRunTime = (quickSortEndTime - quickSortStartTime)/ (double) 1000000;
 		// ---------- END OF THE QUICK SORT ----------
 		System.out.println("The quick sort took: " + quickSortRunTime + " milliseconds");
+		
+		System.out.println("Thepresorted array: ");
+		for (int i = 0; i < inputArray.length; ++i)
+		{
+			System.out.println(inputArray[i]);	
+		}
+		System.out.println("The sorted array for IS:");
+		Double[] insertionSortArray = ArraySortTools.insertionSort(inputArray);
+		for (int i = 0; i < insertionSortArray.length; ++i)
+		{
+			System.out.println(insertionSortArray[i]);	
+		}
+		
 
 	} // End of main method
 
